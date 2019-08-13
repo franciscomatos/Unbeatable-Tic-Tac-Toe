@@ -10,5 +10,6 @@ while playerToken not in [1, 2]:
     playerToken = input('Select token: 1 - X, 2 - O: ')
     print(playerToken)
 
-game = Game(playerName, playerToken)
+token = 'X' if playerToken == 1 else 'O'
+game = Game(playerName, token)
 game.beginGame()
