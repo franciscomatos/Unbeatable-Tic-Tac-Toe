@@ -23,3 +23,4 @@ class Move:
 class Move(Schema):
     position = fields.Number()
     points = fields.Number()
+    player = fields.String()
