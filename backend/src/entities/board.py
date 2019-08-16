@@ -1,12 +1,11 @@
+from marshmallow import Schema, fields
+
 # Board class. Used to represent the board and associated methods
 class Board:
 
-    # board itself
-    # not sure about list of list, probably will change it to a single list
-    board = [[1,2,3], [4,5,6], [7,8,9]]
-
-    def __init__(self):
-        pass
+    def __init__(self, board = [[1,2,3], [4,5,6], [7,8,9]]):
+        # board itself
+        self.board = board
 
     # modifies the board
     def insertPosition(self, line, column, token):
@@ -24,3 +23,7 @@ class Board:
                 print(index, end='|')
             print()
             
+
+# serializable class
+class BoardSchema(Schema):
+    board = fields.List(fields.Number(), required=True)
