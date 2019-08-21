@@ -9,7 +9,7 @@ import copy
 class Game:
 
     board = Board()
-    availablePositions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    availablePositions = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     nextMove = 0
 
@@ -32,8 +32,10 @@ class Game:
     # finds the row and column correspondent to the index and calls board insertion method
     # also updates the available positions list  
     def insertSymbol(self, position, token):
+        print('gonna insert ', token, ' in ', position)
         for i in range(3):
             for j in range(3):
+                print('board position: ', self.board.board[i][j], ' position: ')
                 if self.board.board[i][j] == position:
                     self.board.insertPosition(i, j, token)
                     self.foundFreePosition = True
@@ -45,7 +47,6 @@ class Game:
             for j in range(3):
                 if board.board[i][j] == position: board.board[i][j] = token 
                     
-
     # method to be called in every iteration of the minimax algorithm to find every possible move
     def findAvailablePositions(self, board):
         availableMoves = []
@@ -77,7 +78,6 @@ class Game:
 
         return maximum
 
-
     # minimax algorithm implementation
     def findBestMove(self, board, currentToken, nextToken):
         # depending on the token we will have to maximize or to minimize
@@ -104,7 +104,6 @@ class Game:
         if currentToken == self.player1.token: return self.minimize(availableMoves)
         else: return self.maximize(availableMoves)
         
-
     # player 2 (CPU) logic
     def player2Play(self):
         print(self.player2.name + "'s turn")
@@ -125,7 +124,7 @@ class Game:
         print(self.player1.name + "'s turn")
 
         try:
-            position = int(input('Select one of the available positions: '))
+            position = input('Select one of the available positions: ')
             self.insertSymbol(position, self.player1.token)
         except ValueError:
             print('Invalid Position')

@@ -20,7 +20,6 @@ class Move:
         return self.points > other
 
 # serializable class
-class Move(Schema):
+class MoveSchema(Schema):
     position = fields.Number()
     points = fields.Number()
-    player = fields.String()

@@ -4,18 +4,21 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PlayerApiService } from './player/player-api.service';
+import { BoardApiService } from './board/board-api.service';
+import { MoveApiService } from './move/move-api.service';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PlayerApiService],
+  providers: [BoardApiService, MoveApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

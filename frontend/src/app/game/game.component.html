@@ -1,0 +1,9 @@
+<table>
+  <tbody>
+    <tr *ngFor="let row of board.board">
+      <td *ngFor="let position of row" (click)="selectPosition(position)">{{position}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div [innerHTML]="winner"></div>

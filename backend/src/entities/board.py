@@ -3,7 +3,7 @@ from marshmallow import Schema, fields
 # Board class. Used to represent the board and associated methods
 class Board:
 
-    def __init__(self, board = [[1,2,3], [4,5,6], [7,8,9]]):
+    def __init__(self, board = [['1','2','3'], ['4','5','6'], ['7','8','9']]):
         # board itself
         self.board = board
 
@@ -26,4 +26,12 @@ class Board:
 
 # serializable class
 class BoardSchema(Schema):
-    board = fields.List(fields.Number(), required=True)
+    board = fields.List(fields.List(fields.Str()), required=True)
+
+# serializable class
+class WinSchema(Schema):
+    win = fields.Boolean()
+
+# serializable class
+#class BoardSchema(Schema):
+#    board = fields.List(fields.Number(), required=True)
