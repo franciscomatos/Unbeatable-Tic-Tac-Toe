@@ -1,4 +1,4 @@
-from .entities.board import Board, BoardSchema, WinSchema
+from .entities.board import Board, BoardSchema
 from .entities.player import Player, PlayerSchema
 from .entities.game import Game
 from .entities.move import Move, MoveSchema
@@ -41,7 +41,6 @@ def getBoard():
 
 @app.route('/board/win')
 def checkWin():
-    schema = WinSchema(many=False)
     winner = False if game.checkWin(game.board, game.availablePositions) == 2 else True
     return jsonify(winner)
 

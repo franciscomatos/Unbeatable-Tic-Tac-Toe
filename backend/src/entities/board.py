@@ -29,9 +29,5 @@ class BoardSchema(Schema):
     board = fields.List(fields.List(fields.Str()), required=True)
 
 # serializable class
-class WinSchema(Schema):
-    win = fields.Boolean()
-
-# serializable class
 #class BoardSchema(Schema):
 #    board = fields.List(fields.Number(), required=True)

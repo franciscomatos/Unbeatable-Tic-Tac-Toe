@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { BoardApiService } from '../board/board-api.service';
 import { MoveApiService } from '../move/move-api.service';
 import { Move } from '../move/move.model';
-import { Win } from '../board/win.model';
 
 @Component({
   selector: 'app-game',
@@ -23,8 +22,13 @@ export class GameComponent implements OnInit {
 
   winner: string = 'not yet';
 
+  images: { [id: string] : string; } = {};
+
   constructor(private boardService: BoardApiService, private moveService: MoveApiService) { 
     this.turn = true;
+    this.images["X"] = "../../assets/cross.png";
+    this.images["O"] = "../../assets/circle.png";
+    this.images[""] = "";
   }
 
   ngOnInit() {

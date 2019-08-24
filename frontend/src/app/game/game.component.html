@@ -1,7 +1,8 @@
 <table>
   <tbody>
     <tr *ngFor="let row of board.board">
-      <td *ngFor="let position of row" (click)="selectPosition(position)">{{position}}</td>
+      <td *ngFor="let position of row" (click)="selectPosition(position)">
+        <img class="board-element" [src]="images[position]" onerror='this.style.display = "none"'> 
     </tr>
   </tbody>
 </table>

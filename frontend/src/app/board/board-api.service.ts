@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Board } from './board.model';
 import { API_URL_BOARD, API_URL_WIN } from '../env'
-import { Win } from './win.model';
 
 @Injectable()
 export class BoardApiService {
