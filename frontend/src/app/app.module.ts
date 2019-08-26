@@ -7,17 +7,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { BoardApiService } from './board/board-api.service';
 import { MoveApiService } from './move/move-api.service';
 import { GameComponent } from './game/game.component';
+import { MainScreenComponent } from './main-screen/main-screen.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent
+    GameComponent,
+    MainScreenComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    NgbModule ],
   providers: [BoardApiService, MoveApiService],
   bootstrap: [AppComponent]
 })
