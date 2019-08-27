@@ -7,17 +7,16 @@ import copy
 
 # Game class. Where all game logic will be implemented
 class Game:
-
-    board = Board()
-    availablePositions = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-
-    nextMove = 0
-
-    someoneWon = False
-    foundFreePosition = False
-
     # by omission, the opponent will be the CPU
     def __init__(self, player1, token1, player2 = 'CO'):
+        self.board = Board([['1','2','3'], ['4','5','6'], ['7','8','9']])
+        self.availablePositions = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+        self.nextMove = 0
+
+        self.someoneWon = False
+        self.foundFreePosition = False
+
         token2 = 'O' if token1 == 'X' else 'X'
         self.player1 = Player(player1, token1)
         self.player2 = Player(player2, token2)

@@ -6,11 +6,20 @@ from .entities.move import Move, MoveSchema
 from flask import Flask, jsonify, request 
 from flask_cors import CORS 
 
-# creating the Flask application
+playerName = 'Francisco'
+playerToken = 1
+token = 'X' if playerToken == 1 else 'O'
 
-app = Flask(__name__)
-CORS(app) # We need Cross-Origin Resource Sharing
 
+class Main:
+
+    def __init__(self):
+        self.game = Game(playerName, token)
+
+    def runApp(self):
+        # creating the Flask application
+        self.app = Flask(__name__)
+        CORS(self.app) # We need Cross-Origin Resource Sharing
 # playerName = input('Enter your name: ')
 # playerToken = int(input('Select token: 1 - X, 2 - O: '))
 
@@ -19,11 +28,7 @@ CORS(app) # We need Cross-Origin Resource Sharing
 #     playerToken = input('Select token: 1 - X, 2 - O: ')
 #     print(playerToken)
 
-playerName = 'Francisco'
-playerToken = 1
 
-token = 'X' if playerToken == 1 else 'O'
-game = Game(playerName, token)
 # game.beginGame()
 
 #@app.route('/test')
@@ -32,16 +37,29 @@ game = Game(playerName, token)
 #    player = schema.dump(game.player1)
 #    return jsonify(player.data)
 
+
+main = Main()
+# creating the Flask application
+app = Flask(__name__)
+CORS(app) # We need Cross-Origin Resource Sharing
+
+@app.route('/reset')
+def resetGame():
+    del main.game
+    main.game = Game(playerName, token)
+    print('game board: ', main.game.board.board)
+    return getBoard()
+
 @app.route('/board')
 def getBoard():
     schema = BoardSchema(many=False)
-    board = schema.dump(game.board)
+    board = schema.dump(main.game.board)
     print(board.data)
     return jsonify(board.data)
 
 @app.route('/board/win')
 def checkWin():
-    winner = False if game.checkWin(game.board, game.availablePositions) == 2 else True
+    winner = False if main.game.checkWin(main.game.board, main.game.availablePositions) == 2 else True
     return jsonify(winner)
 
 @app.route('/move/player', methods = ['POST'])
@@ -55,8 +73,8 @@ def postMove():
 
     print("move position: ", move.position)
 
-    game.insertSymbol(str(int(move.position)), game.player1.token)
-    game.foundFreePosition = False
+    main.game.insertSymbol(str(int(move.position)), main.game.player1.token)
+    main.game.foundFreePosition = False
     return getBoard()
     # return created exam
     #new_move = MoveSchema().dump(move).data
@@ -65,5 +83,5 @@ def postMove():
 @app.route('/move/opponent')
 def opponentMove():
     print('opponent move')
-    game.player2Play()
+    main.game.player2Play()
     return getBoard()

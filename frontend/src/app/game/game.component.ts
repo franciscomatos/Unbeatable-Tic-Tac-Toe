@@ -13,9 +13,10 @@ import { Move } from '../move/move.model';
 export class GameComponent implements OnInit {
 
   turn: boolean;
-  
+  counter: number;
+
   winSubs: Subscription;
-  win: Boolean = false;
+  win: Boolean;
 
   boardSubs: Subscription;
   board: Board;
@@ -26,9 +27,11 @@ export class GameComponent implements OnInit {
 
   constructor(private boardService: BoardApiService, private moveService: MoveApiService) { 
     this.turn = true;
+    this.win = false;
     this.images["X"] = "../../assets/cross.png";
     this.images["O"] = "../../assets/circle.png";
     this.images[""] = "";
+    this.counter = 0;
   }
 
   ngOnInit() {
@@ -39,35 +42,51 @@ export class GameComponent implements OnInit {
     this.boardSubs.unsubscribe();
   }
 
+  newGame() {
+    console.log('entrou na função');
+    this.boardSubs = this.boardService.resetGame().subscribe(res => {
+      this.board = res
+      this.turn = true
+      this.win = false;}, console.error);
+  }
 
   getBoard() {
     this.boardSubs = this.boardService.getBoard().subscribe(res => {this.board = res;}, console.error);
   }
 
+  changeBoard(position: any) {
+    var i: number;
+    var j: number;
+    for(i = 0; i < 3; i++)
+      for(j = 0; j < 3; j++)
+        if(this.board.board[i][j] == position) this.board.board[i][j] = 'X'; 
+  }
+
   selectPosition(position: any) {
-    console.log(this.win)
     if (this.turn && !this.win) {
+      this.changeBoard(position); // to avoid delay in the first play
       this.turn = false // player cannot play 2 times in a row
       var new_move = new Move(position, 0);
       this.boardSubs = this.moveService.postMove(new_move).subscribe(res => {
         this.board = this.board
+        this.counter++
         this.opponentMove()
         this.checkWin();}, console.error);
     }
   }
 
   opponentMove() {
-    if (!this.turn) {
+    if (!this.turn && this.counter != 9) {
       this.boardSubs = this.moveService.opponentMove().subscribe(res => {
         this.board = res
         this.turn = true
+        this.counter++
         this.checkWin();}, console.error);
     }
   }
 
   checkWin() {
     this.winSubs = this.boardService.checkWin().subscribe(res => {this.win = res;}, console.error);
-    console.log(this.win);
     if(this.win) this.winner = 'Victory!'
   }
 }

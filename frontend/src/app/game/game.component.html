@@ -1,10 +1,23 @@
-<table>
+<!-- navigation bar -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Unbeatable Tic-Tac-Toe</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <button mat-button (click)="newGame()">New Game</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- board  -->
+<table class="board">
   <tbody>
     <tr *ngFor="let row of board.board">
       <td *ngFor="let position of row" (click)="selectPosition(position)">
-        <img class="board-element" [src]="images[position]" onerror='this.style.display = "none"'> 
+        <div class="container">
+            <img class="board-element" [src]="images[position]" onerror='this.style.display = "none"'> 
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
-
-<div [innerHTML]="winner"></div>
