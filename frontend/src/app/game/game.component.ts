@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Board } from '../board/board.model';
+import { Board } from '../dataTypes/board.model';
 import { Subscription } from 'rxjs';
-import { BoardApiService } from '../board/board-api.service';
-import { MoveApiService } from '../move/move-api.service';
-import { Move } from '../move/move.model';
+import { BoardApiService } from '../services/board-api.service';
+import { MoveApiService } from '../services/move-api.service';
+import { Move } from '../dataTypes/move.model';
 
 @Component({
   selector: 'app-game',

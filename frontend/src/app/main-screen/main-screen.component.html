@@ -1,3 +1,46 @@
-<p>
-  main-screen works!
-</p>
+<!-- navigation bar -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1>Unbeatable Tic-Tac-Toe</h1>
+      <span class="menu-spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+<div class="box">
+  <mat-card class="my-card">
+    <mat-card-content>
+      <form class="my-form">
+          <mat-form-field class="full-width">
+            <mat-label>Player Name</mat-label>
+            <input matInput placeholder="Player 1" [(ngModel)]="selectedName" name="name" required>
+          </mat-form-field>
+          <br>
+          <section>
+            <mat-label>Select Difficulty:</mat-label>
+            <mat-radio-group class="tp-radio-group" [(ngModel)]="selectedDifficulty" name="difficulty" required>
+                <mat-radio-button class = "tp-radio-button"
+                    *ngFor = "let difficulty of difficulties" [value] = "difficulty">
+                    {{difficulty}}
+                </mat-radio-button>
+              </mat-radio-group>
+          </section>
+          <br>
+          <section>
+            <mat-label>Play As:</mat-label>  
+            <mat-radio-group class="tp-radio-group" [(ngModel)]="selectedSymbol" name="symbol" required>
+              <mat-radio-button class = "tp-radio-button"
+                  *ngFor = "let symbol of symbols" [value] = "symbol">
+                  <img class="board-element" [src]="images[symbol]" onerror='this.style.display = "none"'> 
+              </mat-radio-button>
+            </mat-radio-group>
+          </section>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="button-container">
+        <button mat-raised-button (click)="begin()" color="primary">Begin Game</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

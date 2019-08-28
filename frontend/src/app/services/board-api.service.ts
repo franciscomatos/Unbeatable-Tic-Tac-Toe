@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Board } from './board.model';
+import { Board } from '../dataTypes/board.model';
 import { API_URL_BOARD, API_URL_WIN, API_URL_NEW_GAME} from '../env'
 
 @Injectable()

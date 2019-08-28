@@ -1,0 +1,41 @@
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.my-card.mat-card {
+    padding: 10px;
+}
+
+mat-card {
+    width: 400px;
+}
+
+mat-form-field {
+    width: 380px;
+}
+  
+mat-card-title,
+mat-card-content {
+display: flex;
+justify-content: center;
+}
+
+mat-label {
+    margin-right: 12px;
+}
+
+mat-radio-button {
+    margin-right: 12px;
+}
+
+.board-element {
+    width: 30px;
+}
+
+.button-container {
+    float: right;
+    margin-right: 10px;
+}

@@ -1,6 +1,7 @@
 from .board import Board
 from .player import Player
 from .move import Move
+from marshmallow import Schema, fields
 
 import random
 import copy
@@ -216,3 +217,8 @@ class Game:
             print('winner is ', self.player1.name)
         else:
             print('winner is ', self.player2.name)
+
+# serializable class
+class GameSchema(Schema):
+    playerName = fields.Str()
+    playerToken = fields.Str()
