@@ -190,6 +190,7 @@ class Game:
         return flag
 
     # check for a win horizontaly, verticaly and diagonaly
+    # 1 means someone won, 0 is tie, 2 is nothing
     def checkWin(self, board, availablePositions):
         if self.checkWinHorizontal(board): return 1
         elif self.checkWinVertical(board): return 1

@@ -10,14 +10,25 @@
 </mat-toolbar>
 
 <!-- board  -->
-<table class="board">
-  <tbody>
-    <tr *ngFor="let row of board.board">
-      <td *ngFor="let position of row" (click)="selectPosition(position)">
-        <div class="container">
-            <img class="board-element" [src]="images[position]" onerror='this.style.display = "none"'> 
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <table class="board">
+    <tbody>
+      <tr *ngFor="let row of board.board">
+        <td *ngFor="let position of row" (click)="selectPosition(position)">
+          <div class="container">
+              <img class="board-element" [src]="images[position]" onerror='this.style.display = "none"'> 
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="win != 2" class="end-box">
+  <mat-card class="my-card">
+    <mat-card-content>
+      <h2>{{winStatus}}</h2>
+      <button mat-button (click)="newGame()" color="primary">Start Over</button>
+    </mat-card-content>
+  </mat-card>
+</div>

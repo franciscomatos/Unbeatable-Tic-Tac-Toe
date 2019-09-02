@@ -72,9 +72,14 @@ def getBoard():
     print(board.data)
     return jsonify(board.data)
 
+#@app.route('/board/win')
+#def checkWin():
+#    winner = False if main.game.checkWin(main.game.board, main.game.availablePositions) == 2 else True
+#    return jsonify(winner)
+
 @app.route('/board/win')
 def checkWin():
-    winner = False if main.game.checkWin(main.game.board, main.game.availablePositions) == 2 else True
+    winner = main.game.checkWin(main.game.board, main.game.availablePositions)
     return jsonify(winner)
 
 @app.route('/move/player', methods = ['POST'])

@@ -21,22 +21,23 @@ export class GameComponent implements OnInit {
   counter: number;
 
   winSubs: Subscription;
-  win: Boolean;
+  win: number;
+  winStatus: string;
 
   boardSubs: Subscription;
   board: Board;
 
   winner: string = 'not yet';
 
-  images: { [id: string] : string; } = {};
+  images: { [id: string] : string; } = { ['X'] : '../../assets/cross.png', ['O'] : '../../assets/circle.png', [''] : ''};
+  winLabel: { [id: number] : string } = { [0] : "It's a Tie!", [1] : 'You Won!', [2] : 'Nothing', [3] : 'You Lost!'};
 
   constructor(private route: ActivatedRoute, private boardService: BoardApiService, private moveService: MoveApiService) { 
     this.turn = true;
-    this.win = false;
-    this.images["X"] = "../../assets/cross.png";
-    this.images["O"] = "../../assets/circle.png";
-    this.images[""] = "";
+    this.win = 2;
+    this.winStatus = this.winLabel[this.win];
     this.counter = 0;
+
     this.playerName = this.route.snapshot.paramMap.get('name');
     this.playerToken = this.route.snapshot.paramMap.get('token');
     this.difficulty = this.route.snapshot.paramMap.get('difficulty');
@@ -55,7 +56,9 @@ export class GameComponent implements OnInit {
     this.boardSubs = this.boardService.resetGame().subscribe(res => {
       this.board = res
       this.turn = true
-      this.win = false;}, console.error);
+      this.win = 2
+      this.winStatus = this.winLabel[this.win]
+      this.counter = 0;}, console.error);
   }
 
   getBoard() {
@@ -71,19 +74,21 @@ export class GameComponent implements OnInit {
   }
 
   selectPosition(position: any) {
-    if (this.turn && !this.win) {
+    if (this.turn && this.win == 2) {
       this.changeBoard(position); // to avoid delay in the first play
       this.turn = false // player cannot play 2 times in a row
       var new_move = new Move(position, 0);
       this.boardSubs = this.moveService.postMove(new_move).subscribe(res => {
         this.board = this.board
         this.counter++
+        this.checkWin()
         this.opponentMove()
-        this.checkWin();}, console.error);
+        ;}, console.error);
     }
   }
 
   opponentMove() {
+    console.log(this.counter);
     if (!this.turn && this.counter != 9) {
       this.boardSubs = this.moveService.opponentMove().subscribe(res => {
         this.board = res
@@ -94,7 +99,10 @@ export class GameComponent implements OnInit {
   }
 
   checkWin() {
-    this.winSubs = this.boardService.checkWin().subscribe(res => {this.win = res;}, console.error);
-    if(this.win) this.winner = 'Victory!'
-  }
+    this.winSubs = this.boardService.checkWin().subscribe(res => {
+      this.win = res
+      if(this.win == 1 && this.turn) this.win = 3
+      this.winStatus = this.winLabel[this.win]
+      ;}, console.error);
+    }
 }

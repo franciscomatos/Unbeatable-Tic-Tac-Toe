@@ -53,3 +53,15 @@ table tr td:last-child {
     color: white;
     text-decoration: none;
 }
+
+.end-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    z-index: 10px;
+}
+
+.my-card {
+    text-align: center;
+}
