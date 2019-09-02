@@ -6,9 +6,9 @@ from .entities.move import Move, MoveSchema
 from flask import Flask, jsonify, request 
 from flask_cors import CORS 
 
-playerName = 'Francisco'
-playerToken = 1
-token = 'X' if playerToken == 1 else 'O'
+# playerName = 'Francisco'
+# playerToken = 1
+# token = 'X' if playerToken == 1 else 'O'
 
 
 class Main:
@@ -18,7 +18,7 @@ class Main:
         self.playerToken = playerToken
     
     def buildGame(self):
-        self.game = Game(playerName, token)
+        self.game = Game(self.playerName, self.playerToken)
 
 # playerName = input('Enter your name: ')
 # playerToken = int(input('Select token: 1 - X, 2 - O: '))
@@ -62,7 +62,7 @@ def beginGame():
 @app.route('/reset')
 def resetGame():
     del main.game
-    main.game = Game(playerName, token)
+    main.game = Game(main.playerName, main.playerToken)
     return getBoard()
 
 @app.route('/board')

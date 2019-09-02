@@ -39,3 +39,8 @@ mat-radio-button {
     float: right;
     margin-right: 10px;
 }
+
+.main-title {
+    color: white;
+    text-decoration: none;
+}

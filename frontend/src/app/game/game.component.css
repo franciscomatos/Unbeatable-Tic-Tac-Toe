@@ -48,3 +48,8 @@ table tr td:last-child {
 .board-element {
     width: 100%;
 }
+
+.main-title {
+    color: white;
+    text-decoration: none;
+}

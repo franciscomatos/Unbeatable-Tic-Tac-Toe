@@ -37,7 +37,7 @@ export class MainScreenComponent implements OnInit {
     var newGame = new Game(this.selectedName, this.selectedSymbol);
     this.gameService.beginGame(newGame).subscribe( res => {
       this.game = res
-      this.router.navigateByUrl('/game')
+      this.router.navigateByUrl('/game/' + this.selectedName + '/' + this.selectedSymbol + '/' + this.selectedDifficulty)
       ;}, console.error);
   }
 

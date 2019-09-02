@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { BoardApiService } from '../services/board-api.service';
 import { MoveApiService } from '../services/move-api.service';
 import { Move } from '../dataTypes/move.model';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-game',
@@ -11,6 +12,10 @@ import { Move } from '../dataTypes/move.model';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
+
+  playerName: string;
+  playerToken: string;
+  difficulty: string;
 
   turn: boolean;
   counter: number;
@@ -25,13 +30,16 @@ export class GameComponent implements OnInit {
 
   images: { [id: string] : string; } = {};
 
-  constructor(private boardService: BoardApiService, private moveService: MoveApiService) { 
+  constructor(private route: ActivatedRoute, private boardService: BoardApiService, private moveService: MoveApiService) { 
     this.turn = true;
     this.win = false;
     this.images["X"] = "../../assets/cross.png";
     this.images["O"] = "../../assets/circle.png";
     this.images[""] = "";
     this.counter = 0;
+    this.playerName = this.route.snapshot.paramMap.get('name');
+    this.playerToken = this.route.snapshot.paramMap.get('token');
+    this.difficulty = this.route.snapshot.paramMap.get('difficulty');
   }
 
   ngOnInit() {
@@ -59,7 +67,7 @@ export class GameComponent implements OnInit {
     var j: number;
     for(i = 0; i < 3; i++)
       for(j = 0; j < 3; j++)
-        if(this.board.board[i][j] == position) this.board.board[i][j] = 'X'; 
+        if(this.board.board[i][j] == position) this.board.board[i][j] = this.playerToken; 
   }
 
   selectPosition(position: any) {

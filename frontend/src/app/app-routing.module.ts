@@ -4,7 +4,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { GameComponent } from './game/game.component';
 
 const routes: Routes = [
-  {path: 'game', component: GameComponent}, 
+  {path: 'game/:name/:token/:difficulty', component: GameComponent}, 
   {path: 'mainScreen', component: MainScreenComponent}, 
   {path: '', redirectTo: '/mainScreen', pathMatch:'full'}
 ];
