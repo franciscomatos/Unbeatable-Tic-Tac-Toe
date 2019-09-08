@@ -9,7 +9,7 @@ Download the .zip and open two command lines to run the backend and the frontend
 
 ### Prerequisites
 
-To start with, you will need an up to date version of Python 3. 
+To start, you will need an up to date version of Python 3. 
 If you don't have Python 3 available on your machine, please, browse to the [Python download page](https://www.python.org/downloads/) and install it.
 
 After installing Python, you will have to install the pipenv tool:
@@ -18,7 +18,7 @@ After installing Python, you will have to install the pipenv tool:
 pip install pipenv
 ```
 
-Now you will need is to install Flask. Besides Flask, you will also need to install marshmallow to handle serialization and deserialization of JSON objects. 
+Now you will need to install Flask. You will also need to install marshmallow to handle serialization and deserialization of JSON objects. 
 To install both dependencies, issue the following command in the backend directory:
 
 ```
